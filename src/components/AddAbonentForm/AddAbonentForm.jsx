@@ -1,6 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { InputList, Label, Button } from './AddAbonentForm.styled';
 import styled from 'styled-components';
 import { Formik, Form, Field } from 'formik';
+import { addContact } from '../../redux/contactSlice';
 const shortid = require('shortid');
 
 const initialValues = {
@@ -18,10 +20,20 @@ const Input = styled(Field)`
     box-shadow: 1px 1px 2px 0 #4169e1;
   }
 `;
-export const AddForm = ({ onSubmit }) => {
+export const AddForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
+
   const hendleSubmit = ({ name, number, id }, { resetForm }) => {
     id = shortid.generate();
-    onSubmit({ name, number, id });
+    console.log(contacts);
+    const existContact = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (existContact) {
+      resetForm();
+      return alert(`${name} is already in contacts`);
+    } else dispatch(addContact({ name, number, id }));
 
     resetForm();
   };

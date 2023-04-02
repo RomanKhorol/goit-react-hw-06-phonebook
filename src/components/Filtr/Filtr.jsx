@@ -1,13 +1,20 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { setFilter } from '../../redux/filterSlice';
+
 import { FitrTitle, FitrWrap, FitrInput } from './Filtr.styled';
 
-export const Filter = ({ value, onChange }) => (
-  <FitrWrap>
-    <FitrTitle>Find contact by name</FitrTitle>
+export const Filter = () => {
+  const dispatch = useDispatch();
 
-    <FitrInput type="text" name="filter" value={value} onChange={onChange} />
-  </FitrWrap>
-);
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
+  const changeFilter = e => {
+    console.log(e.currentTarget.value);
+    dispatch(setFilter(e.currentTarget.value));
+  };
+  return (
+    <FitrWrap>
+      <FitrTitle>Find contact by name</FitrTitle>
+
+      <FitrInput type="text" onChange={changeFilter} />
+    </FitrWrap>
+  );
 };

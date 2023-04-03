@@ -4,7 +4,7 @@ import { AbonentListUl } from './AbonentList.styled';
 const shortid = require('shortid');
 
 export const ItemList = () => {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
   const filterValue = useSelector(state => state.filter);
   const getVisibleContact = () => {
     const normalizedFilter = filterValue.toLowerCase();

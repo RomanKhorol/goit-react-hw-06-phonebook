@@ -3,14 +3,14 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: [],
+  initialState: { contacts: [] },
   reducers: {
     addContact(state, action) {
-      state.push(action.payload);
+      state.contacts.push(action.payload);
     },
 
     deleteContact(state, action) {
-      return state.filter(contact => contact.id !== action.payload);
+      return state.contacts.filter(contact => contact.id !== action.payload);
     },
   },
 });

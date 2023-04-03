@@ -22,11 +22,11 @@ const Input = styled(Field)`
 `;
 export const AddForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
 
   const hendleSubmit = ({ name, number, id }, { resetForm }) => {
     id = shortid.generate();
-    console.log(contacts);
+
     const existContact = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
